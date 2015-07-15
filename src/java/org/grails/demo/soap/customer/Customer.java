@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
+ *         &lt;element name="CustomerID" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
  *         &lt;element name="FirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="LastName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="Username" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "customer", propOrder = {
-    "id",
+    "customerID",
     "firstName",
     "lastName",
     "username",
@@ -52,8 +52,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class Customer {
 
-    @XmlElement(name = "ID")
-    protected Long id;
+    @XmlElement(name = "CustomerID")
+    protected Long customerID;
     @XmlElement(name = "FirstName")
     protected String firstName;
     @XmlElement(name = "LastName")
@@ -64,27 +64,27 @@ public class Customer {
     protected Customer.Payments payments;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the customerID property.
      * 
      * @return
      *     possible object is
      *     {@link Long }
      *     
      */
-    public Long getID() {
-        return id;
+    public Long getCustomerID() {
+        return customerID;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the customerID property.
      * 
      * @param value
      *     allowed object is
      *     {@link Long }
      *     
      */
-    public void setID(Long value) {
-        this.id = value;
+    public void setCustomerID(Long value) {
+        this.customerID = value;
     }
 
     /**

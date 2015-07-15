@@ -17,7 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="CustomerID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="FirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,27 +29,54 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetCustomer", propOrder = {
-    "id"
+    "customerID",
+    "firstName"
 })
 public class GetCustomer {
 
-    @XmlElement(name = "ID")
-    protected int id;
+    @XmlElement(name = "CustomerID")
+    protected int customerID;
+    @XmlElement(name = "FirstName")
+    protected String firstName;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the customerID property.
      * 
      */
-    public int getID() {
-        return id;
+    public int getCustomerID() {
+        return customerID;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the customerID property.
      * 
      */
-    public void setID(int value) {
-        this.id = value;
+    public void setCustomerID(int value) {
+        this.customerID = value;
+    }
+
+    /**
+     * Gets the value of the firstName property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * Sets the value of the firstName property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFirstName(String value) {
+        this.firstName = value;
     }
 
 }

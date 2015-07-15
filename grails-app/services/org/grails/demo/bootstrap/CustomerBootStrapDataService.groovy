@@ -18,7 +18,7 @@ class CustomerBootStrapDataService extends AbstractBootStrapDataService {
     String getGetCustomerResponseXml() {
         """<ns2:GetCustomerResponse xmlns:ns2="http://demo.grails.org" xmlns:ns3="http://demo.grails.org/">
          <Customer>
-            <ID>100</ID>
+            <CustomerID>100</CustomerID>
             <FirstName>Demo</FirstName>
             <LastName>Customer</LastName>
             <Username>demo@gmail.com</Username>
@@ -39,7 +39,7 @@ class CustomerBootStrapDataService extends AbstractBootStrapDataService {
   String getGetCustomerResponseDummyXml() {
         """<ns2:GetCustomerResponse xmlns:ns2="http://demo.grails.org" xmlns:ns3="http://demo.grails.org/">
          <Customer>
-            <ID>1</ID>
+            <CustomerID>1</CustomerID>
             <FirstName>Duncan</FirstName>
             <LastName>MacLeod</LastName>
             <Username>duncan@gmail.com</Username>

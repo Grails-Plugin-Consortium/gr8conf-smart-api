@@ -3,10 +3,6 @@ package org.grails.demo.customer
 import org.grails.demo.annotations.MarshalTo
 import org.grails.demo.soap.customer.GetCustomerResponse
 
-import javax.xml.bind.annotation.XmlAccessType
-import javax.xml.bind.annotation.XmlAccessorType
-import javax.xml.bind.annotation.XmlRootElement
-
 @MarshalTo(clazz = GetCustomerResponse, field = 'responseXml')
 class GetCustomerResponseDomain {
 
@@ -14,6 +10,7 @@ class GetCustomerResponseDomain {
     String responseXml
     Boolean isDefault = false
     String customerId
+    String firstName
     Date dateCreated
     Date lastUpdated
 
@@ -25,7 +22,8 @@ class GetCustomerResponseDomain {
 
     static constraints = {
         description blank: false, nullable: false
-        customerId  blank: true, nullable: true
+        customerId blank: true, nullable: true
+        firstName blank: true, nullable: true
         isDefault()
 
         responseXml widget: 'textarea'
