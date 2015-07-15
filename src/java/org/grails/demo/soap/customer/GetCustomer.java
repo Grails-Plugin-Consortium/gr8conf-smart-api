@@ -3,6 +3,7 @@ package org.grails.demo.soap.customer;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="customerId" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,26 +28,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetCustomer", propOrder = {
-    "customerId"
+    "id"
 })
 public class GetCustomer {
 
-    protected int customerId;
+    @XmlElement(name = "ID")
+    protected int id;
 
     /**
-     * Gets the value of the customerId property.
+     * Gets the value of the id property.
      * 
      */
-    public int getCustomerId() {
-        return customerId;
+    public int getID() {
+        return id;
     }
 
     /**
-     * Sets the value of the customerId property.
+     * Sets the value of the id property.
      * 
      */
-    public void setCustomerId(int value) {
-        this.customerId = value;
+    public void setID(int value) {
+        this.id = value;
     }
 
 }

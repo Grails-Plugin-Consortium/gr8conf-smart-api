@@ -17,35 +17,45 @@ class CustomerBootStrapDataService extends AbstractBootStrapDataService {
 
     String getGetCustomerResponseXml() {
         """<ns2:GetCustomerResponse xmlns:ns2="http://demo.grails.org" xmlns:ns3="http://demo.grails.org/">
-         <customer>
-            <id>1</id>
-            <firstName>Duncan</firstName>
-            <lastName>MacLeod</lastName>
-            <username>duncan@gmail.com</username>
-         </customer>
+         <Customer>
+            <ID>100</ID>
+            <FirstName>Demo</FirstName>
+            <LastName>Customer</LastName>
+            <Username>demo@gmail.com</Username>
+            <Payments>
+               <Payment>
+                  <Date>2015-07-15T16:03:15.794-05:00</Date>
+                  <Amount>19.99</Amount>
+               </Payment>
+               <Payment>
+                  <PaymentDate>2015-06-15T16:03:15.794-05:00</PaymentDate>
+                  <PaymentAmount>19.99</PaymentAmount>
+               </Payment>
+            </Payments>
+         </Customer>
       </ns2:GetCustomerResponse>"""
     }
 
   String getGetCustomerResponseDummyXml() {
         """<ns2:GetCustomerResponse xmlns:ns2="http://demo.grails.org" xmlns:ns3="http://demo.grails.org/">
-         <customer>
-            <id>100</id>
-            <firstName>Dummy</firstName>
-            <lastName>Dummy</lastName>
-            <username>dummy@gmail.com</username>
-         </customer>
+         <Customer>
+            <ID>1</ID>
+            <FirstName>Duncan</FirstName>
+            <LastName>MacLeod</LastName>
+            <Username>duncan@gmail.com</Username>
+            <Payments>
+               <Payment>
+                  <PaymentDate>2015-07-15T16:03:15.794-05:00</PaymentDate>
+                  <PaymentAmount>9.99</PaymentAmount>
+               </Payment>
+            </Payments>
+         </Customer>
       </ns2:GetCustomerResponse>"""
     }
 
   String getGetCustomerResponseInvalidCustomerIdXml() {
-      """<ns3:GetCustomerResponse xmlns:ns2="http://demo.grails.org/" xmlns:ns3="http://demo.grails.org">
-         <customer/>
-      </ns3:GetCustomerResponse>"""
-    }
-
-    String getGetCustomerResponseInvalidNullCustomerIdXml() {
-        """<ns3:GetCustomerResponse xmlns:ns2="http://demo.grails.org/" xmlns:ns3="http://demo.grails.org">
-         <customer/>
-      </ns3:GetCustomerResponse>"""
+      """<ns2:GetCustomerResponse xmlns:ns2="http://demo.grails.org" xmlns:ns3="http://demo.grails.org/">
+         <Customer></Customer>
+      </ns2:GetCustomerResponse>"""
     }
 }

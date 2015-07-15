@@ -20,8 +20,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Date" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="Amount" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="PaymentDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="PaymentAmount" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -32,64 +32,64 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "payment", propOrder = {
-    "date",
-    "amount"
+    "paymentDate",
+    "paymentAmount"
 })
 public class Payment {
 
-    @XmlElement(name = "Date", type = String.class)
+    @XmlElement(name = "PaymentDate", type = String.class)
     @XmlJavaTypeAdapter(Adapter1 .class)
     @XmlSchemaType(name = "dateTime")
-    protected Date date;
-    @XmlElement(name = "Amount")
-    protected Double amount;
+    protected Date paymentDate;
+    @XmlElement(name = "PaymentAmount")
+    protected Double paymentAmount;
 
     /**
-     * Gets the value of the date property.
+     * Gets the value of the paymentDate property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public Date getDate() {
-        return date;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
     /**
-     * Sets the value of the date property.
+     * Sets the value of the paymentDate property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setDate(Date value) {
-        this.date = value;
+    public void setPaymentDate(Date value) {
+        this.paymentDate = value;
     }
 
     /**
-     * Gets the value of the amount property.
+     * Gets the value of the paymentAmount property.
      * 
      * @return
      *     possible object is
      *     {@link Double }
      *     
      */
-    public Double getAmount() {
-        return amount;
+    public Double getPaymentAmount() {
+        return paymentAmount;
     }
 
     /**
-     * Sets the value of the amount property.
+     * Sets the value of the paymentAmount property.
      * 
      * @param value
      *     allowed object is
      *     {@link Double }
      *     
      */
-    public void setAmount(Double value) {
-        this.amount = value;
+    public void setPaymentAmount(Double value) {
+        this.paymentAmount = value;
     }
 
 }

@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="customerId" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="paymentDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="paymentAmount" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="ID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="PaymentDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
+ *         &lt;element name="PaymentAmount" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,33 +33,35 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakePayment", propOrder = {
-    "customerId",
+    "id",
     "paymentDate",
     "paymentAmount"
 })
 public class MakePayment {
 
-    protected int customerId;
-    @XmlElement(type = String.class)
+    @XmlElement(name = "ID")
+    protected int id;
+    @XmlElement(name = "PaymentDate", type = String.class)
     @XmlJavaTypeAdapter(Adapter1 .class)
     @XmlSchemaType(name = "dateTime")
     protected Date paymentDate;
+    @XmlElement(name = "PaymentAmount")
     protected Double paymentAmount;
 
     /**
-     * Gets the value of the customerId property.
+     * Gets the value of the id property.
      * 
      */
-    public int getCustomerId() {
-        return customerId;
+    public int getID() {
+        return id;
     }
 
     /**
-     * Sets the value of the customerId property.
+     * Sets the value of the id property.
      * 
      */
-    public void setCustomerId(int value) {
-        this.customerId = value;
+    public void setID(int value) {
+        this.id = value;
     }
 
     /**
