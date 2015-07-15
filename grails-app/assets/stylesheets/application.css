@@ -1,0 +1,294 @@
+/*
+*= require thirdparty/bootstrap/bootstrap.min
+*= require thirdparty/bootstrap/bootstrap-theme.min
+*= require thirdparty/bootstrap.plugins/ekko-lightbox.min
+*= require thirdparty/font-awesome
+*= require thirdparty/prettify
+*= require site/datepicker
+*= require theme-light.css
+*= require_self
+*/
+.nav .selected {
+    background-color: #cccccc;
+}
+
+.heavy {
+    font-weight: 500;
+}
+
+.padding-sm {
+    padding-bottom: 10px;
+}
+
+section.first th {
+       background-color: #f0f0f0;
+}
+
+.name {
+    min-width: 150px;
+}
+
+.form-actions {
+    margin-top: 10px;
+}
+
+#Menu  {
+    margin-bottom: 10px;
+}
+
+.radiocheckbox {
+    width: 206px;
+    display: inline-block;
+    margin-top: 2px;
+    margin-right: 14px;
+}
+
+.btn {
+    border-radius: 4px;
+    /*font-size: 15px;*/
+    font-weight: normal;
+    /*line-height: 1.4;*/
+    /*padding: 10px 15px;*/
+    transition: border 0.25s linear 0s, color 0.25s linear 0s, background-color 0.25s linear 0s;
+    background-image: none;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #039cda;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+    background-color: #0983da;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover, .btn-secondary:active, .btn-secondary.active, .btn-secondary.disabled, .btn-secondary[disabled] {
+    background-color: #eee;
+    border: 1px solid #ddd;
+}
+
+.btn.disabled, .btn[disabled], .btn.disabled:hover, .btn[disabled]:hover {
+    cursor: default;
+    background-image: none;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: #aaa;
+    background-color: #f3f3f3;
+}
+
+.navbar .pull-right .dropdown-menu:before {
+    left: auto;
+    right: 12px;
+}
+
+.navbar .pull-right .dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+
+@media (max-width: 979px) {
+    .navbar .dropdown-menu.no-collapse {
+        background-color: #ffffff;
+        border-color: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        border-style: solid;
+        border-width: 1px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        display: none;
+        float: left;
+        margin: 0;
+        padding: 4px 0;
+        position: absolute;
+        top: 100%;
+    }
+
+    .navbar .dropdown-menu.no-collapse:before,
+    .navbar .dropdown-menu.no-collapse:after {
+        display: block;
+    }
+
+    .navbar .dropdown-menu.no-collapse li + li a {
+        margin-bottom: 0;
+    }
+
+    .navbar .dropdown-menu.no-collapse .divider {
+        display: list-item;
+    }
+
+    .navbar .dropdown-menu.no-collapse a {
+        border-radius: 0;
+        color: #333333;
+        font-weight: normal;
+        padding: 3px 15px;
+    }
+
+    .navbar .dropdown-menu.no-collapse a:hover,
+    .navbar .dropdown-menu.no-collapse .active a,
+    .navbar .dropdown-menu.no-collapse .active a:hover {
+        background-color: #0088cc;
+        color: #ffffff;
+    }
+
+    .btn-group.open .dropdown-menu.no-collapse {
+        display: block;
+        margin-top: 1px;
+        border-radius: 5px;
+    }
+}
+
+.navbar-search .search-query, input.search-query, input.search-icon {
+    background: url(../images/search.png) no-repeat 4px center #fff;
+    padding-left: 30px;
+    border-radius: 5px;
+}
+
+input.search-home {
+    margin-bottom: 0;
+    height: 38px;
+}
+
+.box {
+    border: 1px solid #dbdee0;
+    margin: 0 0 30px 0;
+}
+
+.box .box-header {
+    background: #fff;
+    color: #000;
+    font-size: 24px;
+    overflow: hidden;
+    height: 40px;
+    padding: 5px;
+    line-height: 28px;
+}
+
+.box .box-content {
+    padding: 15px;
+    color: #000;
+    /*font-weight: bold;*/
+}
+
+.box.notification {
+    border: 1px solid #0983da;
+}
+
+.box.notification .box-header {
+    background: #0983da;
+    color: #fff;
+}
+
+.box.notification .box-content {
+    color: #0983da;
+}
+
+.box.error {
+    border: 1px solid #da2c39;
+}
+
+.box.error .box-header {
+    background: #da2c39;
+    color: #fff;
+}
+
+.box.error .box-content {
+    color: #da2c39;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.table-header-primary {
+    background-color: #00a4e4;
+    color: #fff;
+    padding: 4px;
+}
+
+.inline-feedback.valid {
+    color: #4b7931;
+}
+
+.inline-feedback.invalid {
+    color: #F14A23
+}
+
+.inline-feedback.informational {
+    color: #cbbb0f;
+}
+
+.message-global-container {
+    height: 1px;
+    left: 0;
+    position: fixed;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: auto;
+    z-index: 1051; /* bootstrap modal z-index + 1 */
+}
+
+.message-global {
+    display: inline-block;
+    max-width: 500px;
+}
+
+.confirmational .alert-informational-icon {
+    color: #4b7931;
+}
+
+.informational .alert-informational-icon {
+    color: #bfc740;
+}
+
+.message-detail:first-of-type {
+    margin-top: 10px;
+}
+
+.message-title {
+    color: #333;
+    font-weight: 700;
+}
+
+.message-details {
+    color: #333;
+}
+
+.message-dismiss {
+    text-align: right;
+}
+
+.user-feedback.btn.error {
+    background-color: #f9e0e0;
+    color: #cc0000;
+}
+
+.user-feedback.btn.confirmational {
+    background: #b2e0b2;
+    color: #009900;
+}
+
+.user-feedback.btn.informational {
+    background: #fdf5c4;
+    color: #bfc740;
+}
