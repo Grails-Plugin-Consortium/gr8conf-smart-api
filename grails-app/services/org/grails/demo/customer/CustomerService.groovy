@@ -5,6 +5,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty
 import org.grails.cxf.utils.GrailsCxfEndpoint
 import org.grails.demo.BaseCacheService
+import org.grails.demo.data.CustomerRefreshJob
 import org.grails.demo.soap.customer.Customer
 import org.grails.demo.soap.customer.GetCustomerResponse
 import org.grails.demo.soap.customer.GetCustomersResponse
@@ -40,13 +41,13 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             def response = replayResponse(Customer)
             customer = response instanceof GetCustomerResponse ? response?.customer : response
         } else {
-            String cacheKey = getCacheKey(CUSTOMER_CACHE_PREFIX, customerId, [firstName])
+            String cacheKey = getCacheKey(CUSTOMER_CACHE_PREFIX, customerId, firstName)
             String jsonResponse = redisService.get cacheKey
             if (jsonResponse && cachingEnabled) {
                 customer = gson.fromJson(jsonResponse, Customer)
             } else {
                 customer = getCustomerRemote(customerId, firstName)
-                if (customer?.customerId && cachingEnabled) {
+                if (customer && cachingEnabled) {
                     cacheObjectInBackground(cacheKey, customer, CUSTOMER_CACHE_EXPIRE)
                 }
             }
@@ -89,8 +90,11 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             @WebParam(name = "PaymentAmount", targetNamespace = "")
                     Double paymentAmount
     ) {
-        //todo: flush this out if time
-        return null
+        Customer customer = customerServiceClient.makePayment(customerId, paymentDate, paymentAmount)
+        if(customer?.customerId) {
+            refreshCustomerCache(customer?.customerId?.intValue(), customer?.firstName)
+        }
+        customer
     }
 
     Customer getMockCustomer(String customerId, String firstName) {
@@ -156,4 +160,15 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
         customers
     }
 
+    Customer getCustomerAndCache(Integer customerId, String firstName, Boolean spawnThread = true) {
+        Customer response = customerServiceClient.getCustomer(customerId, firstName)
+        //For this demo refresh both the id:name cache and the id cache keys
+        cacheObjectInBackground(getCacheKey(CUSTOMER_CACHE_PREFIX, customerId, firstName), response, CUSTOMER_CACHE_EXPIRE, spawnThread)
+        cacheObjectInBackground(getCacheKey(CUSTOMER_CACHE_PREFIX, customerId), response, CUSTOMER_CACHE_EXPIRE, spawnThread)
+        response
+    }
+
+    void refreshCustomerCache(Integer customerId, String firstName) {
+        jesqueService.enqueue(CustomerRefreshJob.queue, CustomerRefreshJob.simpleName, customerId, firstName)
+    }
 }

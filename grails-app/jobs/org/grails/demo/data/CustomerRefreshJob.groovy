@@ -1,14 +1,17 @@
 package org.grails.demo.data
 
+import org.grails.demo.customer.CustomerService
+
 
 class CustomerRefreshJob {
 
     static queue = 'customerRefreshQueue'
     static workerPool = 'customerRefreshPool'
 
-    def customerService
+    CustomerService customerService
 
-    def perform(String brandID, String customerNumber) {
-//        customerService.getCustomerAndCache(brandID, customerNumber, false)
+    def perform(Integer customerId, String firstName) {
+        println "Fetching and caching customer ${customerId} now..."
+        customerService.getCustomerAndCache(customerId, firstName, false)
     }
 }
