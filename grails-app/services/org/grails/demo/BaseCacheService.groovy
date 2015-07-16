@@ -22,7 +22,7 @@ abstract class BaseCacheService {
     protected static final Gson gson = new Gson()
 
     protected static String getCacheKey(String prefix, Object customerId = null, List<String> params = []) {
-        "$prefix:${customerId?.toString()}${params ? ':' + params?.findAll()?.join(':') : ''}".toString()
+        "$prefix:${customerId?.toString()}${params?.findAll{ it } ? ':' + params.findAll{ it }.join(':') : ''}".toString()
     }
 
     protected void clearCachedObject(String cacheKey) {

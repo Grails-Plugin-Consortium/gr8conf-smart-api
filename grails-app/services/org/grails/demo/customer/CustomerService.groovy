@@ -40,7 +40,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             def response = replayResponse(Customer)
             customer = response instanceof GetCustomerResponse ? response?.customer : response
         } else {
-            String cacheKey = getCacheKey(CUSTOMER_CACHE_PREFIX, customerId)
+            String cacheKey = getCacheKey(CUSTOMER_CACHE_PREFIX, customerId, [firstName])
             String jsonResponse = redisService.get cacheKey
             if (jsonResponse && cachingEnabled) {
                 customer = gson.fromJson(jsonResponse, Customer)
