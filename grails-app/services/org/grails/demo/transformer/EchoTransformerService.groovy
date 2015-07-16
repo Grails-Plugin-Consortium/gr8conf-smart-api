@@ -10,9 +10,12 @@ class EchoTransformerService {
             def slurped = new XmlSlurper().parseText(xml)
 
             map.each { key, value ->
-                slurped.depthFirst().findAll {
-                    it.name()?.toString()?.toLowerCase() == key?.toString()?.toLowerCase()
-                }*.replaceBody(value)
+                //todo: maybe remove this if you want to echo values of 'groovy false'
+                if(value) {
+                    slurped.depthFirst().findAll {
+                        it.name()?.toString()?.toLowerCase() == key?.toString()?.toLowerCase()
+                    }*.replaceBody(value)
+                }
             }
 
             return XmlUtil.serialize( slurped )

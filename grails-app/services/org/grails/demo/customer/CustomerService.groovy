@@ -13,6 +13,7 @@ import org.grails.demo.soap.customer.ObjectFactory
 import org.springframework.beans.factory.annotation.Value
 
 import javax.jws.WebParam
+import javax.xml.ws.soap.SOAPFaultException
 import java.lang.reflect.Type
 
 @GrailsCxfEndpoint
@@ -33,8 +34,14 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             @WebParam(name = "FirstName", targetNamespace = "")
                     String firstName
     ) {
-        Customer customer
+        Customer customer = cacheMockRecordReplayGetCustomer(customerId, firstName)
+        def getCustomerResponse = new GetCustomerResponse(customer: customer)
+        return getResponse(customer, objectFactory.createGetCustomerResponse(getCustomerResponse))
 
+    }
+
+    private Customer cacheMockRecordReplayGetCustomer(int customerId, String firstName) {
+        Customer customer
         if (mockEnabled) {
             customer = getMockCustomer(customerId?.toString(), firstName)
         } else if (replayEnabled) {
@@ -52,13 +59,17 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
                 }
             }
         }
-
-        def getCustomerResponse = new GetCustomerResponse(customer: customer)
-        return getResponse(customer, objectFactory.createGetCustomerResponse(getCustomerResponse))
-
+        customer
     }
 
+    @Override
     List<Customer> getCustomers() {
+        List<Customer> customers = cacheMockRecordReplayGetCustomers()
+        def getCustomersResponse = new GetCustomersResponse(customers: customers)
+        return getResponse(customers, objectFactory.createGetCustomersResponse(getCustomersResponse))
+    }
+
+    private List<Customer> cacheMockRecordReplayGetCustomers() {
         List<Customer> customers
         Type listType = new TypeToken<ArrayList<Customer>>() {}.getType();
 
@@ -76,9 +87,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
                 }
             }
         }
-
-        def getCustomersResponse = new GetCustomersResponse(customers: customers)
-        return getResponse(customers, objectFactory.createGetCustomersResponse(getCustomersResponse))
+        customers
     }
 
     @Override
@@ -129,7 +138,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
         Customer customer = new Customer()
         try {
             customer = customerServiceClient.getCustomer(customerId, firstName)
-        } catch(ConnectException connectionException){
+        } catch(SOAPFaultException connectionException){
             throw connectionException
         } catch (Exception e) {
             log.error(e)
