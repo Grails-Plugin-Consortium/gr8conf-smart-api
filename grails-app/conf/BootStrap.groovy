@@ -8,7 +8,7 @@ class BootStrap {
 
     def init = { servletContext ->
         SessionMode.findOrSaveWhere(
-                sessionModeStatus: SessionModeStatus.RECORD,
+                sessionModeStatus: SessionModeStatus.NONE,
                 sessionId: '96d1a465-8538-4de1-9470-92088953194c')
 
         JSON.registerObjectMarshaller(SessionMode) {

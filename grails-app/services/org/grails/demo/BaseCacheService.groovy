@@ -1,15 +1,15 @@
 package org.grails.demo
 
+import com.google.gson.Gson
+import grails.plugin.jesque.JesqueService
+import grails.plugin.redis.RedisService
 import grails.util.Holders
-import org.grails.demo.soap.customer.CustomerService
+import org.codehaus.groovy.grails.web.util.WebUtils
 import org.grails.demo.marshaller.ResponseMarshallerService
 import org.grails.demo.session.SessionMode
 import org.grails.demo.session.SessionModeService
 import org.grails.demo.session.SessionModeStatus
-import com.google.gson.Gson
-import grails.plugin.jesque.JesqueService
-import grails.plugin.redis.RedisService
-import org.codehaus.groovy.grails.web.util.WebUtils
+import org.grails.demo.soap.customer.CustomerService
 
 import javax.xml.bind.JAXBElement
 
@@ -95,6 +95,7 @@ abstract class BaseCacheService {
     This is done because the cxf client plugin and cxf are fighting for some reason when these are defined
     in the global scope for autowiring.
      */
+
     protected static CustomerService getCustomerServiceClient() {
         Holders?.grailsApplication?.mainContext?.getBean('customerServiceClient')
     }

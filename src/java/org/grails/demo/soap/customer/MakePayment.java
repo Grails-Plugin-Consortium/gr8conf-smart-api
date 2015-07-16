@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="CustomerID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="CustomerId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="PaymentDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="PaymentAmount" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
  *       &lt;/sequence>
@@ -33,14 +33,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MakePayment", propOrder = {
-    "customerID",
+    "customerId",
     "paymentDate",
     "paymentAmount"
 })
 public class MakePayment {
 
-    @XmlElement(name = "CustomerID")
-    protected int customerID;
+    @XmlElement(name = "CustomerId")
+    protected int customerId;
     @XmlElement(name = "PaymentDate", type = String.class)
     @XmlJavaTypeAdapter(Adapter1 .class)
     @XmlSchemaType(name = "dateTime")
@@ -49,19 +49,19 @@ public class MakePayment {
     protected Double paymentAmount;
 
     /**
-     * Gets the value of the customerID property.
+     * Gets the value of the customerId property.
      * 
      */
-    public int getCustomerID() {
-        return customerID;
+    public int getCustomerId() {
+        return customerId;
     }
 
     /**
-     * Sets the value of the customerID property.
+     * Sets the value of the customerId property.
      * 
      */
-    public void setCustomerID(int value) {
-        this.customerID = value;
+    public void setCustomerId(int value) {
+        this.customerId = value;
     }
 
     /**

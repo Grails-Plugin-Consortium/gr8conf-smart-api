@@ -10,6 +10,8 @@
             
             <g:sortableColumn property="customerId" title="${message(code: 'getCustomerResponseDomain.customerId.label', default: 'Customer Id')}" />
             
+            <g:sortableColumn property="firstName" title="${message(code: 'getCustomerResponseDomain.firstName.label', default: 'First Name')}" />
+            
             <g:sortableColumn property="isDefault" title="${message(code: 'getCustomerResponseDomain.isDefault.label', default: 'Is Default')}" />
             
         </tr>
@@ -21,6 +23,8 @@
                 <td><g:link action="show" id="${getCustomerResponseDomainInstance.id}">${fieldValue(bean: getCustomerResponseDomainInstance, field: "description")}</g:link></td>
                 
                 <td>${fieldValue(bean: getCustomerResponseDomainInstance, field: "customerId")}</td>
+                
+                <td>${fieldValue(bean: getCustomerResponseDomainInstance, field: "firstName")}</td>
                 
                 <td><g:formatBoolean boolean="${getCustomerResponseDomainInstance.isDefault}" /></td>
                 

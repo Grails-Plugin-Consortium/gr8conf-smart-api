@@ -172,8 +172,11 @@ function Page() {
                 window.print();
             };
 
+            self.list();
+
             return self;
         };
+
         ko.applyBindings(new ViewModel(), $('#sessionContainer')[0]);
     }
 

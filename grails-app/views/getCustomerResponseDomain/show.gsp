@@ -31,6 +31,13 @@
 			</tr>
 		
 			<tr class="prop">
+				<td valign="top" class="name"><g:message code="getCustomerResponseDomain.firstName.label" default="First Name" /></td>
+				
+				<td valign="top" class="value">${fieldValue(bean: getCustomerResponseDomainInstance, field: "firstName")}</td>
+				
+			</tr>
+		
+			<tr class="prop">
 				<td valign="top" class="name"><g:message code="getCustomerResponseDomain.isDefault.label" default="Is Default" /></td>
 				
 				<td valign="top" class="value"><g:formatBoolean boolean="${getCustomerResponseDomainInstance?.isDefault}" /></td>

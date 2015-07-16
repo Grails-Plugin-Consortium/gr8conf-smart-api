@@ -18,6 +18,14 @@
 				</div>
 			</div>
 
+			<div class="${hasErrors(bean: getCustomerResponseDomainInstance, field: 'firstName', 'error')} ">
+				<label for="firstName" class="control-label"><g:message code="getCustomerResponseDomain.firstName.label" default="First Name" /></label>
+				<div>
+					<g:textField class="form-control" name="firstName" value="${getCustomerResponseDomainInstance?.firstName}"/>
+					<span class="help-inline">${hasErrors(bean: getCustomerResponseDomainInstance, field: 'firstName', 'error')}</span>
+				</div>
+			</div>
+
 			<div class="${hasErrors(bean: getCustomerResponseDomainInstance, field: 'isDefault', 'error')} ">
 				<label for="isDefault" class="control-label"><g:message code="getCustomerResponseDomain.isDefault.label" default="Is Default" /></label>
 				<div>

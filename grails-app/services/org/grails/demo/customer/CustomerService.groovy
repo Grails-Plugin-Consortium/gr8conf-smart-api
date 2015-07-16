@@ -26,11 +26,16 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
     private String CUSTOMER_CACHE_PREFIX
 
     @Override
-    Customer getCustomer(@WebParam(name = "customerId", targetNamespace = "") int customerId) {
+    Customer getCustomer(
+            @WebParam(name = "CustomerId", targetNamespace = "")
+                    int customerId,
+            @WebParam(name = "FirstName", targetNamespace = "")
+                    String firstName
+    ) {
         Customer customer
 
         if (mockEnabled) {
-            customer = getMockCustomer(customerId?.toString())
+            customer = getMockCustomer(customerId?.toString(), firstName)
         } else if (replayEnabled) {
             def response = replayResponse(Customer)
             customer = response instanceof GetCustomerResponse ? response?.customer : response
@@ -40,8 +45,8 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             if (jsonResponse && cachingEnabled) {
                 customer = gson.fromJson(jsonResponse, Customer)
             } else {
-                customer = getCustomerRemote(customerId)
-                if (customer?.id && cachingEnabled) {
+                customer = getCustomerRemote(customerId, firstName)
+                if (customer?.customerId && cachingEnabled) {
                     cacheObjectInBackground(cacheKey, customer, CUSTOMER_CACHE_EXPIRE)
                 }
             }
@@ -77,16 +82,21 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
 
     @Override
     Customer makePayment(
-            @WebParam(name = "customerId", targetNamespace = "") int customerId,
-            @WebParam(name = "paymentDate", targetNamespace = "") Date paymentDate,
-            @WebParam(name = "paymentAmount", targetNamespace = "") Double paymentAmount) {
+            @WebParam(name = "CustomerId", targetNamespace = "")
+                    int customerId,
+            @WebParam(name = "PaymentDate", targetNamespace = "")
+                    Date paymentDate,
+            @WebParam(name = "PaymentAmount", targetNamespace = "")
+                    Double paymentAmount
+    ) {
         return null
     }
 
-    Customer getMockCustomer(String customerId) {
+    Customer getMockCustomer(String customerId, String firstName) {
         def params = [:]
 
-        if (customerId) params << [customerId: customerId]
+        //Match on these in database
+        params << [customerId: customerId, firstName: firstName ?: null]
 
         GetCustomerResponseDomain getCustomerResponseDomain = getDomainClass(GetCustomerResponseDomain, params)
 
@@ -94,7 +104,8 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
                 (GetCustomerResponse) responseMarshallerService.unmarshalAndEcho(
                         getCustomerResponseDomain,
                         GetCustomerResponseDomain,
-                        [customerId: customerId]
+                        //These will be "echo'd" into the response
+                        [customerId: customerId, firstName: firstName]
                 )
 
         customerResponse?.getCustomer()
@@ -109,10 +120,10 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
             @HystrixProperty(name = "queueSizeRejectionThreshold", value = "12")
     ])
-    Customer getCustomerRemote(Integer customerId) {
+    Customer getCustomerRemote(Integer customerId, String firstName) {
         Customer customer = new Customer()
         try {
-            customer = customerServiceClient.getCustomer(customerId)
+            customer = customerServiceClient.getCustomer(customerId, firstName)
         } catch (Exception e) {
             log.error(e)
         }

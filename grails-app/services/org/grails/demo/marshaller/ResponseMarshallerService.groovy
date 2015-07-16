@@ -58,11 +58,13 @@ class ResponseMarshallerService {
         if (xml) {
             JAXBContext jaxbContext = JAXBContext.newInstance(clazz.package.name, this.class.classLoader)
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            InputStream inputStream = new ByteArrayInputStream(xml.bytes)
+            result = unmarshaller.unmarshal(inputStream)?.value
+//             If there are namespaces this might be required instead
 //            StreamSource streamSource = new StreamSource(new StringReader(xml));
 //            JAXBElement<T> je = unmarshaller.unmarshal(streamSource, clazz);
 //            result = (T) je.value;
-            InputStream inputStream = new ByteArrayInputStream(xml.bytes)
-            result = unmarshaller.unmarshal(inputStream)?.value
+
         }
         result
     }

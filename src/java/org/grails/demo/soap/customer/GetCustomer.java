@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="CustomerID" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="CustomerId" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="FirstName" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -29,30 +29,30 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GetCustomer", propOrder = {
-    "customerID",
+    "customerId",
     "firstName"
 })
 public class GetCustomer {
 
-    @XmlElement(name = "CustomerID")
-    protected int customerID;
+    @XmlElement(name = "CustomerId")
+    protected int customerId;
     @XmlElement(name = "FirstName")
     protected String firstName;
 
     /**
-     * Gets the value of the customerID property.
+     * Gets the value of the customerId property.
      * 
      */
-    public int getCustomerID() {
-        return customerID;
+    public int getCustomerId() {
+        return customerId;
     }
 
     /**
-     * Sets the value of the customerID property.
+     * Sets the value of the customerId property.
      * 
      */
-    public void setCustomerID(int value) {
-        this.customerID = value;
+    public void setCustomerId(int value) {
+        this.customerId = value;
     }
 
     /**

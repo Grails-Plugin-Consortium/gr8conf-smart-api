@@ -55,8 +55,8 @@ grails.project.dependency.resolution = {
         compile 'org.springframework.security:spring-security-ldap:3.2.7.RELEASE'
         compile 'org.springframework.security:spring-security-core:3.2.7.RELEASE'
 
-        compile 'com.netflix.hystrix:hystrix-core:1.4.5'
-        compile 'com.netflix.hystrix:hystrix-metrics-event-stream:1.4.5'
+        runtime 'com.netflix.hystrix:hystrix-core:1.4.5'
+        runtime 'com.netflix.hystrix:hystrix-metrics-event-stream:1.4.5'
         compile 'com.netflix.hystrix:hystrix-javanica:1.4.0'
     }
 
