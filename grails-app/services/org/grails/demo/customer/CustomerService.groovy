@@ -89,6 +89,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             @WebParam(name = "PaymentAmount", targetNamespace = "")
                     Double paymentAmount
     ) {
+        //todo: flush this out if time
         return null
     }
 
@@ -124,6 +125,8 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
         Customer customer = new Customer()
         try {
             customer = customerServiceClient.getCustomer(customerId, firstName)
+        } catch(ConnectException connectionException){
+            throw connectionException
         } catch (Exception e) {
             log.error(e)
         }
@@ -144,6 +147,8 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
         List<Customer> customers = new ArrayList<Customer>()
         try {
             customers = customerServiceClient.getCustomers()
+        } catch(ConnectException connectionException){
+            throw connectionException
         } catch (Exception e) {
             log.error(e)
         }
