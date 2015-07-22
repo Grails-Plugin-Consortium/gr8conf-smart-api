@@ -1,4 +1,4 @@
-grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
+grails.servlet.version = "3.0" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
@@ -52,11 +52,11 @@ grails.project.dependency.resolution = {
         compile(group: 'org.apache.cxf.xjc-utils', name: 'cxf-xjc-runtime', version: '2.6.2') {
             excludes 'activation'
         }
-        compile 'org.springframework.security:spring-security-ldap:3.2.7.RELEASE'
-        compile 'org.springframework.security:spring-security-core:3.2.7.RELEASE'
+//        compile 'org.springframework.security:spring-security-ldap:3.2.7.RELEASE'
+//        compile 'org.springframework.security:spring-security-core:3.2.7.RELEASE'
 
-        runtime 'com.netflix.hystrix:hystrix-core:1.4.5'
-        runtime 'com.netflix.hystrix:hystrix-metrics-event-stream:1.4.5'
+//        runtime 'com.netflix.hystrix:hystrix-core:1.4.5'
+//        runtime 'com.netflix.hystrix:hystrix-metrics-event-stream:1.4.5'
         compile 'com.netflix.hystrix:hystrix-javanica:1.4.0'
     }
 
@@ -66,6 +66,7 @@ grails.project.dependency.resolution = {
         runtime ":redis:1.6.6"
         runtime ":grails-melody:1.56.0"
 
+        compile ":hystrix-circuit-breaker:0.6"
         compile ":scaffolding:2.1.2"
         compile ":jesque:0.8.0-SNAPSHOT"
         compile ':cache:1.1.7'

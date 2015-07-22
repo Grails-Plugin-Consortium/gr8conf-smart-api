@@ -3,14 +3,14 @@
         <a class="navbar-brand" href="${createLink(uri: '/')}">
             Simulation Tool Admin
         </a>
-        <g:if test="${session.user}">
+        %{--<g:if test="${session.user}">--}%
             <a class="toggle-nav btn pull-left" href="#">
                 <i class="icon-reorder"></i>
             </a>
-        </g:if>
+        %{--</g:if>--}%
         <ul class="nav">
 
-            <g:if test="${session.user}">
+            %{--<g:if test="${session.user}">--}%
                 <li class="dropdown dark user-menu">
 
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -32,14 +32,14 @@
                         </li>
                     </ul>
                 </li>
-            </g:if>
-            <g:else>
-                <li class="dark user-menu">
-                    <a href="${createLink(controller: 'login', action: 'auth')}">
-                        <span class="user-name">Log In</span>
-                    </a>
-                </li>
-            </g:else>
+            %{--</g:if>--}%
+            %{--<g:else>--}%
+                %{--<li class="dark user-menu">--}%
+                    %{--<a href="${createLink(controller: 'login', action: 'auth')}">--}%
+                        %{--<span class="user-name">Log In</span>--}%
+                    %{--</a>--}%
+                %{--</li>--}%
+            %{--</g:else>--}%
         </ul>
     </nav>
 </header>

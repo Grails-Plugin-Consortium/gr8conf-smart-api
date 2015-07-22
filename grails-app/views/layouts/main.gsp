@@ -27,11 +27,12 @@
 <body class="contrast-blue">
 <g:render template="/templates/header"/>
 <!-- Header End====================================================================== -->
-<g:if test="${session.user}">
+%{--<g:if test="${session.user}">--}%
     <g:render template="/templates/sideNav"/>
-</g:if>
+%{--</g:if>--}%
 
-<section id="${session?.user ? 'content' : 'open-content'}">
+%{--<section id="${session?.user ? 'content' : 'open-content'}">--}%
+<section id="content">
     <div class="container">
         <div class="row" id="content-wrapper">
             <div class="col-xs-12">

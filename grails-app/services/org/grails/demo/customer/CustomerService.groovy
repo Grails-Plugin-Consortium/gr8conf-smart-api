@@ -127,12 +127,12 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
 
 
     @HystrixCommand(commandProperties = [
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "10000")
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "30000")
     ], threadPoolProperties = [
             @HystrixProperty(name = "coreSize", value = "10"),
-            @HystrixProperty(name = "maxQueueSize", value = "15"),
+            @HystrixProperty(name = "maxQueueSize", value = "20"),
             @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-            @HystrixProperty(name = "queueSizeRejectionThreshold", value = "12")
+            @HystrixProperty(name = "queueSizeRejectionThreshold", value = "18")
     ])
     Customer getCustomerRemote(Integer customerId, String firstName) {
         Customer customer = new Customer()
@@ -149,12 +149,12 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
 
 
     @HystrixCommand(commandProperties = [
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "10000")
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "30000")
     ], threadPoolProperties = [
             @HystrixProperty(name = "coreSize", value = "10"),
-            @HystrixProperty(name = "maxQueueSize", value = "15"),
+            @HystrixProperty(name = "maxQueueSize", value = "20"),
             @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-            @HystrixProperty(name = "queueSizeRejectionThreshold", value = "12")
+            @HystrixProperty(name = "queueSizeRejectionThreshold", value = "18")
     ])
     List<Customer> getCustomersRemote() {
         List<Customer> customers = new ArrayList<Customer>()
