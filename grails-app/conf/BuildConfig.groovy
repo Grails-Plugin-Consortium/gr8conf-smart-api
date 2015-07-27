@@ -48,7 +48,6 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-        compile 'org.apache.cxf.xjc-utils:cxf-xjc-runtime:3.0.2'
         compile(group: 'org.apache.cxf.xjc-utils', name: 'cxf-xjc-runtime', version: '2.6.2') {
             excludes 'activation'
         }
@@ -62,19 +61,16 @@ grails.project.dependency.resolution = {
 
     plugins {
         build ":tomcat:7.0.55.2"
-
         runtime ":redis:1.6.6"
-        runtime ":grails-melody:1.56.0"
 
-        compile ":hystrix-circuit-breaker:0.6"
         compile ":scaffolding:2.1.2"
         compile ":jesque:0.8.0-SNAPSHOT"
         compile ':cache:1.1.7'
-        compile ':redis-flexible-cache:0.3.3'
         compile ":asset-pipeline:2.0.19"
         compile ":cxf-client:2.0.3"
         compile ":cxf:2.0.1"
         compile ":twitter-bootstrap:3.3.1"
+        compile ":hystrix-circuit-breaker:0.6"
 
         runtime ":hibernate:3.6.10.19"
         runtime ":jquery:1.11.1"

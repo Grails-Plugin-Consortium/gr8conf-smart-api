@@ -2,8 +2,6 @@ import com.netflix.hystrix.contrib.javanica.aop.aspectj.HystrixCommandAspect
 
 beans = {
 
-    hystrixCommandAspect(HystrixCommandAspect)
-
     hystrixAspect(HystrixCommandAspect)
 
 //    authenticationManager(ProviderManager, [ref('activeDirectoryAuthenticationProvider')])

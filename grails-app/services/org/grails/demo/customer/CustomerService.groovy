@@ -1,8 +1,6 @@
 package org.grails.demo.customer
 
 import com.google.gson.reflect.TypeToken
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty
 import org.grails.cxf.utils.GrailsCxfEndpoint
 import org.grails.demo.BaseCacheService
 import org.grails.demo.data.CustomerRefreshJob
@@ -13,11 +11,12 @@ import org.grails.demo.soap.customer.ObjectFactory
 import org.springframework.beans.factory.annotation.Value
 
 import javax.jws.WebParam
-import javax.xml.ws.soap.SOAPFaultException
 import java.lang.reflect.Type
 
 @GrailsCxfEndpoint
 class CustomerService extends BaseCacheService implements org.grails.demo.soap.customer.CustomerService {
+
+    def monitoredCustomerService
 
     private static final ObjectFactory objectFactory = new ObjectFactory()
 
@@ -53,7 +52,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             if (jsonResponse && cachingEnabled) {
                 customer = gson.fromJson(jsonResponse, Customer)
             } else {
-                customer = getCustomerRemote(customerId, firstName)
+                customer = monitoredCustomerService.getCustomer(customerId, firstName)
                 if (customer && cachingEnabled) {
                     cacheObjectInBackground(cacheKey, customer, CUSTOMER_CACHE_EXPIRE)
                 }
@@ -81,7 +80,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
             if (jsonResponse) {
                 customers = gson.fromJson(jsonResponse, listType)
             } else {
-                customers = getCustomersRemote()
+                customers = monitoredCustomerService.getCustomers()
                 if (customers) {
                     cacheObjectInBackground(cacheKey, customers, CUSTOMER_CACHE_EXPIRE)
                 }
@@ -100,7 +99,7 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
                     Double paymentAmount
     ) {
         Customer customer = customerServiceClient.makePayment(customerId, paymentDate, paymentAmount)
-        if(customer?.customerId) {
+        if (customer?.customerId) {
             refreshCustomerCache(customer?.customerId?.intValue(), customer?.firstName)
         }
         customer
@@ -123,50 +122,6 @@ class CustomerService extends BaseCacheService implements org.grails.demo.soap.c
                 )
 
         customerResponse?.getCustomer()
-    }
-
-
-    @HystrixCommand(commandProperties = [
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "30000")
-    ], threadPoolProperties = [
-            @HystrixProperty(name = "coreSize", value = "10"),
-            @HystrixProperty(name = "maxQueueSize", value = "20"),
-            @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-            @HystrixProperty(name = "queueSizeRejectionThreshold", value = "18")
-    ])
-    Customer getCustomerRemote(Integer customerId, String firstName) {
-        Customer customer = new Customer()
-        try {
-            customer = customerServiceClient.getCustomer(customerId, firstName)
-        } catch(SOAPFaultException connectionException){
-            throw connectionException
-        } catch (Exception e) {
-            log.error(e)
-        }
-
-        customer
-    }
-
-
-    @HystrixCommand(commandProperties = [
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "30000")
-    ], threadPoolProperties = [
-            @HystrixProperty(name = "coreSize", value = "10"),
-            @HystrixProperty(name = "maxQueueSize", value = "20"),
-            @HystrixProperty(name = "keepAliveTimeMinutes", value = "2"),
-            @HystrixProperty(name = "queueSizeRejectionThreshold", value = "18")
-    ])
-    List<Customer> getCustomersRemote() {
-        List<Customer> customers = new ArrayList<Customer>()
-        try {
-            customers = customerServiceClient.getCustomers()
-        } catch(ConnectException connectionException){
-            throw connectionException
-        } catch (Exception e) {
-            log.error(e)
-        }
-
-        customers
     }
 
     Customer getCustomerAndCache(Integer customerId, String firstName, Boolean spawnThread = true) {
