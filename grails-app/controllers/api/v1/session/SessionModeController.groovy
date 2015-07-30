@@ -71,6 +71,8 @@ class SessionModeController extends RestfulController<SessionMode> {
         }
         def instance = SessionMode.newInstance()
         bindData instance, getObjectToBind()
+        //todo: post data body
+        instance.sessionId = params?.sessionId ?: instance.sessionId
 
         instance.validate()
         if (instance.hasErrors()) {

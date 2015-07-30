@@ -11,7 +11,7 @@ class UrlMappings {
             }
         }
 
-        "/api/sessions"(resources: "sessionMode")
+        "/api/sessions"(resources: "sessionMode", parseRequest: true)
         "/api/sessions/$id/reset"(controller: "sessionMode", action: 'reset')
 
         "/"(controller:'home', action:'index')

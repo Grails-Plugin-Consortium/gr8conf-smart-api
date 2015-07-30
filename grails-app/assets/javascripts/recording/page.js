@@ -265,8 +265,7 @@ function SessionClient() {
             throw 'Session ID is required.';
         }
         return $.ajax({
-            url: client.host + '/api/sessions',
-            data: {'sessionId': sessionId},
+            url: client.host + '/api/sessions?sessionId=' + sessionId,
             contentType: "application/json",
             type: 'POST',
             dataType: 'json'

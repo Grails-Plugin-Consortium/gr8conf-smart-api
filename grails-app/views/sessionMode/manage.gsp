@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
     <script language="JavaScript">
         angular.module('smartApi', []).controller('SessionModeCtrl', ['$scope', function($scope){
-
+             //todo: write in angular instead
         }]);
     </script>
     <style>
